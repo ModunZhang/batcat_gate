@@ -37,12 +37,10 @@ router.get('/query-entry', function (req, res) {
     });
   }
 
-  if (env === consts.GameEnv.Development) {
-    return res.json({
-      code: 200,
-      data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
-    });
-  }
+  return res.json({
+    code: 200,
+    data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
+  });
 
 
   //if (env === consts.GameEnv.Development) {
