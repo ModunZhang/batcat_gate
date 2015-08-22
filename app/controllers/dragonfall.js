@@ -27,12 +27,29 @@ router.get('/query-entry', function (req, res) {
   var version = query.version;
   var env = query.env;
 
-  if (!_.contains(consts.GameEnv, env)) return res.json({code: 500, message: "env 不合法"});
-  //if (env === consts.GameEnv.Development) {
+  if (!_.contains(consts.GameEnv, env))
+    return res.json({code: 500, message: "env 不合法"});
+
+  if (version === Config.AppleVersion) {
+    return res.json({
+      code: 200,
+      data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
+    });
+  }
+
+  if (env === consts.GameEnv.Development) {
     return res.json({
       code: 200,
       data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
     });
+  }
+
+
+  //if (env === consts.GameEnv.Development) {
+  //  return res.json({
+  //    code: 200,
+  //    data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
+  //  });
   //}
   //
   //if (env === consts.GameEnv.Production) {
