@@ -30,39 +30,39 @@ router.get('/query-entry', function (req, res) {
   if (!_.contains(consts.GameEnv, env))
     return res.json({code: 500, message: "env 不合法"});
 
-  if (version === Config.AppleVersion) {
-    return res.json({
-      code: 200,
-      data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
-    });
-  }
-
-  return res.json({
-    code: 200,
-    data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
-  });
-
-
-  //if (env === consts.GameEnv.Development) {
+  //if (version === Config.AppleVersion) {
   //  return res.json({
   //    code: 200,
-  //    data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
+  //    data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
   //  });
   //}
   //
-  //if (env === consts.GameEnv.Production) {
-  //  if (version === Config.CurrentVersion) {
-  //    return res.json({
-  //      code: 200,
-  //      data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
-  //    });
-  //  }
-  //  if (version === Config.AppleVersion) {
-  //    return res.json({
-  //      code: 200,
-  //      data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
-  //    });
-  //  }
-  //}
-  //res.sendStatus(400);
+  //return res.json({
+  //  code: 200,
+  //  data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
+  //});
+
+
+  if (env === consts.GameEnv.Development) {
+    return res.json({
+      code: 200,
+      data: {updateServer: Config.DevUpdateServer, gateServer: Config.DevGateServer}
+    });
+  }
+
+  if (env === consts.GameEnv.Production) {
+    if (version === Config.CurrentVersion) {
+      return res.json({
+        code: 200,
+        data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
+      });
+    }
+    if (version === Config.AppleVersion) {
+      return res.json({
+        code: 200,
+        data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
+      });
+    }
+  }
+  res.sendStatus(400);
 });
