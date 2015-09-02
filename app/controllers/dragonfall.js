@@ -60,7 +60,7 @@ router.get('/query-entry', function (req, res) {
     if (version === Config.AppleVersion) {
       return res.json({
         code: 200,
-        data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
+        data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseUpdateServer}
       });
     }
   }
