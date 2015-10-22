@@ -18,8 +18,8 @@ var Config = {
   AppleGateServer: '54.223.202.136:3011',
   ReleaseUpdateServer: '54.223.166.65:3000',
   ReleaseGateServer: '54.223.166.65:3011',
-  CurrentVersion: '1.01',
-  AppleVersion: '1.1.1'
+  CurrentVersion: '1.1.1',
+  AppleVersion: '1.1.2'
 };
 
 router.get('/query-entry', function (req, res) {
@@ -60,7 +60,7 @@ router.get('/query-entry', function (req, res) {
     if (version === Config.AppleVersion) {
       return res.json({
         code: 200,
-        data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
+        data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
       });
     }
   }
