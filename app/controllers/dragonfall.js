@@ -51,18 +51,23 @@ router.get('/query-entry', function (req, res) {
   }
 
   if (env === consts.GameEnv.Production) {
-    if (version === Config.CurrentVersion) {
-      return res.json({
-        code: 200,
-        data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
-      });
-    }
+    //if (version === Config.CurrentVersion) {
+    //  return res.json({
+    //    code: 200,
+    //    data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
+    //  });
+    //}
     if (version === Config.AppleVersion) {
       return res.json({
         code: 200,
         data: {updateServer: Config.AppleUpdateServer, gateServer: Config.AppleGateServer}
       });
     }
+
+    return res.json({
+      code: 200,
+      data: {updateServer: Config.ReleaseUpdateServer, gateServer: Config.ReleaseGateServer}
+    });
   }
   res.sendStatus(400);
 });
