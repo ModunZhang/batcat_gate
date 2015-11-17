@@ -15,7 +15,7 @@ var Config = {
   ios: {
     development: {
       updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.172.65:3000'
+      gateServer: '54.223.172.65:3011'
     },
     hotfix: {
       updateServer: '54.223.202.136:3000',
@@ -29,7 +29,7 @@ var Config = {
   wp: {
     development: {
       updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:3000'
+      gateServer: '54.223.75.61:3011'
     }
   },
   CurrentVersion: '1.1.1',
@@ -66,6 +66,6 @@ router.get('/query-entry', function (req, res) {
       data: Config.ios.production
     });
   }
-  
+
   res.sendStatus(400);
 });
