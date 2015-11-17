@@ -9,7 +9,7 @@ module.exports = {
   },
   PlatForm:{
     Ios:'ios',
-    WP:'wp',
+    Wp:'wp',
     Android:'android'
   }
 };
