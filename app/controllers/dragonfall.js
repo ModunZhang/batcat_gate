@@ -49,7 +49,7 @@ router.get('/query-entry', function (req, res) {
   if (!!platform && platform === consts.PlatForm.Wp) {
     return res.json({
       code: 200,
-      data: Config.ios.hotfix
+      data: Config.wp.development
     });
   }
 
