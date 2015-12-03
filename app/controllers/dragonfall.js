@@ -11,15 +11,19 @@ var consts = require('../../config/consts');
 var router = express.Router();
 module.exports = router;
 
-var Config = {
+var Version = {
+  CurrentVersion: '1.1.1',
+  AppleVersion: '1.1.2'
+};
+var Entry = {
   ios: {
     development: {
       updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.172.65:3011'
+      gateServer: '54.223.172.65:13100'
     },
     hotfix: {
       updateServer: '54.223.202.136:3000',
-      gateServer: '54.223.202.136:3011'
+      gateServer: '54.223.202.136:13100'
     },
     production: {
       updateServer: '54.223.166.65:3000',
@@ -29,13 +33,14 @@ var Config = {
   wp: {
     development: {
       updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:3011'
+      gateServer: '54.223.75.61:13100'
     }
-  },
-  CurrentVersion: '1.1.1',
-  AppleVersion: '1.1.2'
+  }
 };
 
+/**
+ * 获取入口网关
+ */
 router.get('/query-entry', function (req, res) {
   var query = req.query;
   var version = query.version;
@@ -49,21 +54,21 @@ router.get('/query-entry', function (req, res) {
   if (!!platform && platform === consts.PlatForm.Wp) {
     return res.json({
       code: 200,
-      data: Config.wp.development
+      data: Entry.wp.development
     });
   }
 
   if (env === consts.GameEnv.Development) {
     return res.json({
       code: 200,
-      data: Config.ios.development
+      data: Entry.ios.development
     });
   }
 
   if (env === consts.GameEnv.Production) {
     return res.json({
       code: 200,
-      data: Config.ios.production
+      data: Entry.ios.production
     });
   }
 
