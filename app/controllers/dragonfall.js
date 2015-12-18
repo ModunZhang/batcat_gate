@@ -19,7 +19,7 @@ var Entry = {
   ios: {
     development: {
       updateServer: '54.223.172.65:3000',
-      gateServer: '52.69.0.58:13100'
+      gateServer: '54.223.172.65:13100'
     },
     hotfix: {
       updateServer: '54.223.202.136:3000',
