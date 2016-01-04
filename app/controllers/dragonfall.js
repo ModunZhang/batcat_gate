@@ -11,19 +11,12 @@ var consts = require('../../config/consts');
 var router = express.Router();
 module.exports = router;
 
-var Version = {
-  CurrentVersion: '1.1.1',
-  AppleVersion: '1.1.2'
-};
+var Version = '1.1.1';
 var Entry = {
   ios: {
     development: {
       updateServer: '54.223.172.65:3000',
       gateServer: '54.223.172.65:13100'
-    },
-    hotfix: {
-      updateServer: '54.223.202.136:3000',
-      gateServer: '54.223.202.136:13100'
     },
     production: {
       updateServer: '54.223.166.65:3000',
@@ -37,6 +30,57 @@ var Entry = {
     }
   }
 };
+
+/**
+ * Check Version
+ * @param version
+ * @returns {boolean}
+ */
+var CheckVersion = function (version) {
+  if (!version || !_.isString(version) || version.trim().length === 0) return false;
+  var versions = version.split('.');
+  if (versions.length !== 3) return false;
+  for (var i = 0; i < versions.length; i++) {
+    var v = parseInt(versions[i]);
+    if (!_.isNumber(v) || v < 0) {
+      return false
+    }
+  }
+  return true;
+};
+
+/**
+ * 版本检查
+ */
+router.get('/check-version', function (req, res) {
+  var query = req.query;
+  var version = query.version;
+  var env = query.env;
+  var platform = query.platform;
+  if (!_.contains(consts.GameEnv, env)) {
+    return res.json({code: 500, message: "env 不合法"});
+  }
+  if (!_.contains(consts.PlatForm, platform)) {
+    return res.json({code: 500, message: "platform 不合法"});
+  }
+  if (!CheckVersion(version)) {
+    return res.json({code: 500, message: "version 不合法"});
+  }
+
+  var basePath = '/update/dragonfall/' + platform;
+  if (version > Version) {
+    basePath += "/hotfix"
+  } else {
+    basePath += '/' + env
+  }
+  var filePath = req.app.get('base') + '/public/' + basePath + '/res/version.json';
+  var data = require(filePath);
+  data.basePath = basePath;
+  return res.json({
+    code: 200,
+    data: data
+  });
+});
 
 /**
  * 获取入口网关

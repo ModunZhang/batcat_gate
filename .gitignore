@@ -4,6 +4,7 @@
 */node-log.log
 !.gitignore
 node_modules/*
+public/update/*
 */node_modules/*
 .settings/
 .idea

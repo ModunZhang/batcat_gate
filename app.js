@@ -15,10 +15,12 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view cache', false);
+app.set('base', __dirname);
 if(env === 'development'){
   swig.setDefaults({cache:false});
 }
 app.use(favicon(__dirname + '/public/images/batcat_icon.ico'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
