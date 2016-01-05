@@ -18,6 +18,10 @@ var Entry = {
       updateServer: '54.223.172.65:3000',
       gateServer: '54.223.172.65:13100'
     },
+    hotfix: {
+      updateServer: '54.223.166.65:3000',
+      gateServer: '54.223.166.65:3011'
+    },
     production: {
       updateServer: '54.223.166.65:3000',
       gateServer: '54.223.166.65:3011'
@@ -25,6 +29,28 @@ var Entry = {
   },
   wp: {
     development: {
+      updateServer: '54.223.172.65:3000',
+      gateServer: '54.223.75.61:13100'
+    },
+    hotfix: {
+      updateServer: '54.223.172.65:3000',
+      gateServer: '54.223.75.61:13100'
+    },
+    production: {
+      updateServer: '54.223.172.65:3000',
+      gateServer: '54.223.75.61:13100'
+    }
+  },
+  android: {
+    development: {
+      updateServer: '54.223.172.65:3000',
+      gateServer: '54.223.75.61:13100'
+    },
+    hotfix: {
+      updateServer: '54.223.172.65:3000',
+      gateServer: '54.223.75.61:13100'
+    },
+    production: {
       updateServer: '54.223.172.65:3000',
       gateServer: '54.223.75.61:13100'
     }
@@ -69,9 +95,9 @@ router.get('/check-version', function (req, res) {
 
   var basePath = '/update/dragonfall/' + platform;
   if (version > Version) {
-    basePath += "/hotfix"
+    basePath += "/hotfix";
   } else {
-    basePath += '/' + env
+    basePath += '/' + env;
   }
   var filePath = req.app.get('base') + '/public/' + basePath + '/res/version.json';
   var data = require(filePath);
