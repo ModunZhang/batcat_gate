@@ -105,7 +105,7 @@ router.get('/check-version', function (req, res) {
   var filePath = req.app.get('base') + '/public/' + basePath + '/res/version.json';
   var data = require(filePath);
   data.basePath = basePath;
-  data.entry = entry;
+  data.entry = entry.gateServer;
   return res.json({
     code: 200,
     data: data
