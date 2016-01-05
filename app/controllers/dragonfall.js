@@ -5,6 +5,7 @@
 
 var express = require('express');
 var _ = require('underscore');
+var fs = require('fs');
 
 var consts = require('../../config/consts');
 
@@ -81,7 +82,8 @@ var CheckVersion = function (version) {
  * @returns {*}
  */
 var GetVersionData = function(platform, env){
-  return require('../../public/update/dragonfall/' + platform + '/' + env + '/res/version.json');
+  var path = __dirname + '/../../public/update/dragonfall/' + platform + '/' + env + '/res/version.json';
+  return JSON.parse(fs.readFileSync(path, 'utf8'));
 };
 
 /**
