@@ -94,14 +94,18 @@ router.get('/check-version', function (req, res) {
   }
 
   var basePath = '/update/dragonfall/' + platform;
+  var entry = null;
   if (version > Version) {
     basePath += "/hotfix";
+    entry = Entry[platform]['hotfix'];
   } else {
     basePath += '/' + env;
+    entry = Entry[platform][env];
   }
   var filePath = req.app.get('base') + '/public/' + basePath + '/res/version.json';
   var data = require(filePath);
   data.basePath = basePath;
+  data.entry = entry;
   return res.json({
     code: 200,
     data: data
