@@ -15,7 +15,6 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view cache', false);
-app.set('base', __dirname);
 if(env === 'development'){
   swig.setDefaults({cache:false});
 }

@@ -11,7 +11,6 @@ var consts = require('../../config/consts');
 var router = express.Router();
 module.exports = router;
 
-var Version = '1.1.1';
 var Entry = {
   ios: {
     development: {
@@ -76,6 +75,16 @@ var CheckVersion = function (version) {
 };
 
 /**
+ * 获取版本数据
+ * @param platform
+ * @param env
+ * @returns {*}
+ */
+var GetVersionData = function(platform, env){
+  return require('../../public/update/dragonfall/' + platform + '/' + env + '/res/version.json');
+};
+
+/**
  * 版本检查
  */
 router.get('/check-version', function (req, res) {
@@ -95,20 +104,20 @@ router.get('/check-version', function (req, res) {
 
   var basePath = '/update/dragonfall/' + platform;
   var entry = null;
-  if (version > Version) {
+  var versionData = GetVersionData(platform, env);
+  if(version > versionData.appVersion){
+    versionData = GetVersionData(platform, 'hotfix');
     basePath += "/hotfix";
     entry = Entry[platform]['hotfix'];
-  } else {
+  }else{
     basePath += '/' + env;
     entry = Entry[platform][env];
   }
-  var filePath = req.app.get('base') + '/public/' + basePath + '/res/version.json';
-  var data = require(filePath);
-  data.basePath = basePath;
-  data.entry = entry.gateServer;
+  versionData.basePath = basePath;
+  versionData.entry = entry.gateServer;
   return res.json({
     code: 200,
-    data: data
+    data: versionData
   });
 });
 
