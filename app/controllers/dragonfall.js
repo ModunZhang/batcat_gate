@@ -19,8 +19,8 @@ var Entry = {
       gateServer: '54.223.172.65:13100'
     },
     hotfix: {
-      updateServer: '54.223.166.65:3000',
-      gateServer: '54.223.166.65:3011'
+      updateServer: '52.69.0.58:3000',
+      gateServer: '52.69.0.58:3011'
     },
     production: {
       updateServer: '54.223.166.65:3000',
