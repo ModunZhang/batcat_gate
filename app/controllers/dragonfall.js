@@ -24,7 +24,7 @@ var Entry = {
     },
     production: {
       updateServer: '54.223.166.65:3000',
-      gateServer: '54.223.166.65:3011'
+      gateServer: '52.69.0.58:13100'
     }
   },
   wp: {
