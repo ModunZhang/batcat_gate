@@ -14,46 +14,15 @@ module.exports = router;
 
 var Entry = {
   ios: {
-    development: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.172.65:13100'
-    },
-    hotfix: {
-      updateServer: '52.69.0.58:3000',
-      gateServer: '52.69.0.58:13100'
-    },
-    production: {
-      updateServer: '54.223.166.65:3000',
-      gateServer: '52.69.0.58:13100'
-    }
-  },
-  wp: {
-    development: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    },
-    hotfix: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    },
-    production: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    }
+    development: '54.223.172.65:13100',
+    hotfix: '54.223.172.65:13130',
+    production: '52.69.0.58:13100'
   },
   android: {
-    development: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    },
-    hotfix: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    },
-    production: {
-      updateServer: '54.223.172.65:3000',
-      gateServer: '54.223.75.61:13100'
-    }
+    development: '54.223.172.65:13110'
+  },
+  wp: {
+    development: '54.223.172.65:13120'
   }
 };
 
@@ -81,9 +50,14 @@ var CheckVersion = function (version) {
  * @param env
  * @returns {*}
  */
-var GetVersionData = function(platform, env){
+var GetVersionData = function (platform, env) {
   var path = __dirname + '/../../public/update/dragonfall/' + platform + '/' + env + '/res/version.json';
-  return JSON.parse(fs.readFileSync(path, 'utf8'));
+  try{
+    return JSON.parse(fs.readFileSync(path, 'utf8'));
+  }catch(e){
+    return null;
+  }
+
 };
 
 /**
@@ -107,55 +81,24 @@ router.get('/check-version', function (req, res) {
   var basePath = '/update/dragonfall/' + platform;
   var entry = null;
   var versionData = GetVersionData(platform, env);
-  if(version > versionData.appVersion){
+  if(!versionData){
+    return res.json({code: 500, message: "版本文件丢失"});
+  }
+  if (version > versionData.appVersion) {
     versionData = GetVersionData(platform, 'hotfix');
     basePath += "/hotfix";
     entry = Entry[platform]['hotfix'];
-  }else{
+  } else {
     basePath += '/' + env;
     entry = Entry[platform][env];
   }
+  if (!entry) {
+    return res.json({code: 500, message: "env 不合法"});
+  }
   versionData.basePath = basePath;
-  versionData.entry = entry.gateServer;
+  versionData.entry = entry;
   return res.json({
     code: 200,
     data: versionData
   });
-});
-
-/**
- * 获取入口网关
- */
-router.get('/query-entry', function (req, res) {
-  var query = req.query;
-  var version = query.version;
-  var env = query.env;
-  var platform = query.platform;
-
-  if (!_.contains(consts.GameEnv, env)) {
-    return res.json({code: 500, message: "env 不合法"});
-  }
-
-  if (!!platform && platform === consts.PlatForm.Wp) {
-    return res.json({
-      code: 200,
-      data: Entry.wp.development
-    });
-  }
-
-  if (env === consts.GameEnv.Development) {
-    return res.json({
-      code: 200,
-      data: Entry.ios.development
-    });
-  }
-
-  if (env === consts.GameEnv.Production) {
-    return res.json({
-      code: 200,
-      data: Entry.ios.production
-    });
-  }
-
-  res.sendStatus(400);
 });
