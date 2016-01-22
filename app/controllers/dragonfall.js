@@ -57,7 +57,20 @@ var GetVersionData = function (platform, env) {
   }catch(e){
     return null;
   }
+};
 
+
+/**
+ * 获取公告
+ * @returns {*}
+ */
+var GetNoticeData = function(){
+  var path = __dirname + '/../models/notice.txt';
+  try{
+    return fs.readFileSync(path, 'utf8');
+  }catch(e){
+    return null;
+  }
 };
 
 /**
@@ -81,6 +94,7 @@ router.get('/check-version', function (req, res) {
   var basePath = '/update/dragonfall/' + platform;
   var entry = null;
   var versionData = GetVersionData(platform, env);
+  var notice = GetNoticeData();
   if(!versionData){
     return res.json({code: 500, message: "版本文件丢失"});
   }
@@ -97,6 +111,7 @@ router.get('/check-version', function (req, res) {
   }
   versionData.basePath = basePath;
   versionData.entry = entry;
+  versionData.notice = notice;
   return res.json({
     code: 200,
     data: versionData
