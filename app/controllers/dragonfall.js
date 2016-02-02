@@ -52,9 +52,9 @@ var CheckVersion = function (version) {
  */
 var GetVersionData = function (platform, env) {
   var path = __dirname + '/../../public/update/dragonfall/' + platform + '/' + env + '/res/version.json';
-  try{
+  try {
     return JSON.parse(fs.readFileSync(path, 'utf8'));
-  }catch(e){
+  } catch (e) {
     return null;
   }
 };
@@ -64,11 +64,11 @@ var GetVersionData = function (platform, env) {
  * 获取公告
  * @returns {*}
  */
-var GetNoticeData = function(){
-  var path = __dirname + '/../models/notice.txt';
-  try{
+var GetNoticeData = function (platform, env) {
+  var path = __dirname + '/../../public/update/dragonfall/' + platform + '/' + env + '/notice.txt';
+  try {
     return fs.readFileSync(path, 'utf8');
-  }catch(e){
+  } catch (e) {
     return '';
   }
 };
@@ -94,7 +94,7 @@ router.get('/check-version', function (req, res) {
   var basePath = '/update/dragonfall/' + platform;
   var entry = null;
   var versionData = GetVersionData(platform, env);
-  if(!versionData){
+  if (!versionData) {
     return res.json({code: 500, message: "版本文件丢失"});
   }
   if (version > versionData.appVersion) {
@@ -119,8 +119,18 @@ router.get('/check-version', function (req, res) {
 /**
  * 获取公告
  */
-router.get('/get-notice', function(req, res){
-  var notice = GetNoticeData();
+router.get('/get-notice', function (req, res) {
+  var query = req.query;
+  var env = query.env;
+  var platform = query.platform;
+  if (!_.contains(consts.GameEnv, env)) {
+    return res.json({code: 500, message: "env 不合法"});
+  }
+  if (!_.contains(consts.PlatForm, platform)) {
+    return res.json({code: 500, message: "platform 不合法"});
+  }
+
+  var notice = GetNoticeData(platform, env);
   return res.json({
     code: 200,
     data: notice
