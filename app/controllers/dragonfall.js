@@ -123,6 +123,9 @@ router.get('/get-notice', function (req, res) {
   var query = req.query;
   var env = query.env;
   var platform = query.platform;
+  if(!env) env = 'production';
+  if(!platform) platform = 'ios';
+
   if (!_.contains(consts.GameEnv, env)) {
     return res.json({code: 500, message: "env 不合法"});
   }
