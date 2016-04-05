@@ -14,15 +14,15 @@ module.exports = router;
 
 var Entry = {
   ios: {
-    development: '47.88.76.185:13100',
+    development: '54.223.166.65:13100',
     hotfix: '54.223.166.65:13130',
     production: '52.69.0.58:13100'
   },
   android: {
-    development: '47.88.76.185:13110'
+    development: '54.223.166.65:13110'
   },
   wp: {
-    development: '47.88.76.185:13120'
+    development: '54.223.166.65:13120'
   }
 };
 
