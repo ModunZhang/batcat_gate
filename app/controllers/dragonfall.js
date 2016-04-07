@@ -19,10 +19,12 @@ var Entry = {
     production: '52.69.0.58:13100'
   },
   android: {
-    development: '54.223.166.65:13110'
+    development: '54.223.166.65:13110',
+    production: '54.223.166.65:13110'
   },
   wp: {
-    development: '54.223.166.65:13120'
+    development: '54.223.166.65:13120',
+    production: '54.223.166.65:13120'
   }
 };
 
@@ -123,8 +125,8 @@ router.get('/get-notice', function (req, res) {
   var query = req.query;
   var env = query.env;
   var platform = query.platform;
-  if(!env) env = 'production';
-  if(!platform) platform = 'ios';
+  if (!env) env = 'production';
+  if (!platform) platform = 'ios';
 
   if (!_.contains(consts.GameEnv, env)) {
     return res.json({code: 500, message: "env 不合法"});
