@@ -108,7 +108,7 @@ router.get('/check-version', function (req, res) {
     entry = Entry[platform][env];
   }
   if (!entry) {
-    return res.json({code: 500, message: "env 不合法"});
+    return res.json({code: 500, message: "version 不合法"});
   }
   versionData.basePath = basePath;
   versionData.entry = entry;
