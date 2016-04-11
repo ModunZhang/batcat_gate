@@ -20,7 +20,7 @@ var Entry = {
   },
   android: {
     development: '54.223.166.65:13110',
-    production: '54.223.166.65:13110'
+    production: '52.77.106.75:13100'
   },
   wp: {
     development: '54.223.166.65:13120',
