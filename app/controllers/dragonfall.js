@@ -16,7 +16,7 @@ var Entry = {
   ios: {
     development: '54.223.166.65:13100',
     hotfix: '54.223.166.65:13130',
-    production: '52.69.0.58:13100'
+    production: '114.55.85.67:13100'
   },
   android: {
     development: '54.223.166.65:13110',
