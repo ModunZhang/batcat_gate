@@ -18,6 +18,7 @@ var Entry = {
   },
   android: {
     development: '114.55.85.67:13110',
+    hotfix: '114.55.85.67:13110',
     production: '47.88.188.170:13100'
   },
   wp: {
