@@ -24,7 +24,7 @@ var Entry = {
   wp: {
     development: '114.55.85.67:13120',
     hotfix: '114.55.85.67:13120',
-    production: '47.88.34.153:13100'
+    production: '47.88.78.13:13100'
   }
 };
 
