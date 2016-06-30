@@ -14,11 +14,12 @@ module.exports = router;
 
 var Entry = {
   ios: {
-    development: 'batcat.df.wp.batcatstudio.com:13100'
+    development: 'batcat.df.ios.batcatstudio.com:13100',
+    hotfix: 'batcat.df.ios.batcatstudio.com:13100'
   },
   android: {
-    development: 'batcat.df.wp.batcatstudio.com:13110',
-    hotfix: 'batcat.df.wp.batcatstudio.com:13110',
+    development: 'batcat.df.android.batcatstudio.com:13110',
+    hotfix: 'batcat.df.android.batcatstudio.com:13110',
     production: '47.88.188.170:13100'
   },
   wp: {
