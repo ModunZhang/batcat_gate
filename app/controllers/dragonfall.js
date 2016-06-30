@@ -14,16 +14,16 @@ module.exports = router;
 
 var Entry = {
   ios: {
-    development: '114.55.85.67:13100'
+    development: 'batcat.df.wp.batcatstudio.com:13100'
   },
   android: {
-    development: '114.55.85.67:13110',
-    hotfix: '114.55.85.67:13110',
+    development: 'batcat.df.wp.batcatstudio.com:13110',
+    hotfix: 'batcat.df.wp.batcatstudio.com:13110',
     production: '47.88.188.170:13100'
   },
   wp: {
-    development: '114.55.85.67:13120',
-    hotfix: '114.55.85.67:13120',
+    development: 'batcat.df.wp.batcatstudio.com:13120',
+    hotfix: 'batcat.df.wp.batcatstudio.com:13120',
     production: '47.88.78.13:13100'
   }
 };
