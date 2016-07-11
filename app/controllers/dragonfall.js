@@ -14,18 +14,19 @@ module.exports = router;
 
 var Entry = {
   ios: {
-    development: 'batcat.df.ios.batcatstudio.com:13100',
-    hotfix: 'batcat.df.ios.batcatstudio.com:13100'
+    development: 'df.dev.ios.batcatstudio.com:13100',
+    hotfix: 'df.dev.ios.batcatstudio.com:13100',
+    production: 'df.prod.ios.batcatstudio.com:13130'
   },
   android: {
-    development: 'batcat.df.android.batcatstudio.com:13110',
-    hotfix: 'batcat.df.android.batcatstudio.com:13110',
-    production: '47.88.188.170:13100'
+    development: '114.55.85.67:13110',
+    hotfix: '114.55.85.67:13110',
+    production: '114.55.85.67:13100'
   },
   wp: {
-    development: 'batcat.df.wp.batcatstudio.com:13120',
-    hotfix: 'batcat.df.wp.batcatstudio.com:13120',
-    production: '47.88.78.13:13100'
+    development: '114.55.85.67:13120',
+    hotfix: '114.55.85.67:13120',
+    production: '114.55.85.67:13100'
   }
 };
 
