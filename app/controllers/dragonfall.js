@@ -15,18 +15,15 @@ module.exports = router;
 var Entry = {
   ios: {
     development: 'df.dev.ios.batcatstudio.com:13100',
-    hotfix: 'df.dev.ios.batcatstudio.com:13100',
     production: 'df.prod.ios.batcatstudio.com:13130'
   },
   android: {
-    development: '114.55.85.67:13110',
-    hotfix: '114.55.85.67:13110',
-    production: '114.55.85.67:13100'
+    development: '114.55.85.67:13110'
   },
   wp: {
     development: '114.55.85.67:13120',
     hotfix: '114.55.85.67:13120',
-    production: '114.55.85.67:13100'
+    production: '47.88.78.13:13100'
   }
 };
 
