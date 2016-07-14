@@ -15,7 +15,7 @@ module.exports = router;
 var Entry = {
   ios: {
     development: 'df.dev.ios.gate.batcatstudio.com:13100',
-    hotfix: 'df.hotfix.ios.gate.batcatstudio.com:13130',
+    hotfix: 'df.hotfix.ios.gate.batcatstudio.com:13110',
     production: 'df.prod.ios.gate.batcatstudio.com:13140'
   },
   android: {
