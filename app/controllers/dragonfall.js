@@ -16,7 +16,7 @@ var Entry = {
   ios: {
     development: 'df.dev.ios.gate.batcatstudio.com:13100',
     hotfix: 'df.hotfix.ios.gate.batcatstudio.com:13130',
-    production: '114.55.175.147:13100'
+    production: '47.88.105.14:13100'
   },
   android: {
     development: '114.55.85.67:13110'
