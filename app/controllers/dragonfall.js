@@ -115,10 +115,7 @@ var GetNoticeData = function (platform) {
 router.get('/check-version', function (req, res) {
     var query = req.query;
     var version = query.version;
-    var platform = query.platform;
-    if (!_.contains(consts.PlatForm, platform)) {
-        return res.json({code: 500, message: "platform 不合法"});
-    }
+    var platform = 'wp';
     if (!CheckVersion(version)) {
         return res.json({code: 500, message: "version 不合法"});
     }
@@ -131,11 +128,8 @@ router.get('/check-version', function (req, res) {
             return Promise.resolve(true);
         }
     })().then(function (exist) {
-        if (!exist) {
-            platform = "wp2";
-        }
+        var entry = exist ? Entry['wp'] : Entry['wp2'];
         var basePath = '/update/dragonfall/' + platform;
-        var entry = Entry[platform];
         var versionData = GetVersionData(platform);
         if (!versionData) {
             return res.json({code: 500, message: "版本文件丢失"});
