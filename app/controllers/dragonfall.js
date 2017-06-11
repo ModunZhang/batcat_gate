@@ -129,7 +129,7 @@ router.get('/check-version', function (req, res) {
         }
     })().then(function (exist) {
         var entry = exist ? Entry['wp'] : Entry['wp2'];
-        var basePath = '/update/dragonfall/' + platform;
+        var basePath = '/update/dragonfall/' + platform + '/production';
         var versionData = GetVersionData(platform);
         if (!versionData) {
             return res.json({code: 500, message: "版本文件丢失"});
