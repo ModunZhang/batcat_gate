@@ -128,12 +128,10 @@ router.get('/check-version', function (req, res) {
         if (deviceId) {
             return isDeviceExist(deviceId)
         } else {
-            return Promise.resolve(false);
+            return Promise.resolve(true);
         }
     })().then(function (exist) {
-        if (
-            !exist
-        ) {
+        if (!exist) {
             platform = "wp2";
         }
         var basePath = '/update/dragonfall/' + platform;
