@@ -7,6 +7,7 @@ var express = require('express');
 var _ = require('underscore');
 var fs = require('fs');
 var MongoClient = require('mongodb').MongoClient;
+var Promise = require('bluebird');
 
 var consts = require('../../config/consts');
 
@@ -19,23 +20,23 @@ var Entry = {
 };
 
 const DBUrl = 'mongodb://modun:Zxm75504109@10.24.138.234:27017/dragonfall-scmobile-wp?authSource=admin';
-let db = null;
+var db = null;
 function getDB() {
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject) {
         if (db && db.serverConfig.isConnected()) return resolve(db);
-        MongoClient.connect(DBUrl, (err, _db) => {
+        MongoClient.connect(DBUrl, function (err, _db) {
             if (err) return reject(err);
             console.log('db opened');
             db = _db;
-            db.on('close', () => {
+            db.on('close', function () {
                 console.log('db closed');
                 db = null;
             });
-            db.on('timeout', (e) => {
+            db.on('timeout', function (e) {
                 console.error(e);
                 closeDB();
             });
-            db.on('error', (e) => {
+            db.on('error', function (e) {
                 console.error(e);
                 closeDB();
             });
@@ -54,10 +55,10 @@ function closeDB() {
 }
 
 function isDeviceExist(deviceId) {
-    return getDB().then((db) => {
+    return getDB().then(function (db) {
         const collection = db.collection('devices');
         return collection.find({_id: deviceId}).count();
-    }).then((count) => {
+    }).then(function (count) {
         return Promise.resolve(count > 0);
     })
 }
@@ -129,8 +130,10 @@ router.get('/check-version', function (req, res) {
         } else {
             return Promise.resolve(false);
         }
-    })().then((exist) => {
-        if (!exist) {
+    })().then(function (exist) {
+        if (
+            !exist
+        ) {
             platform = "wp2";
         }
         var basePath = '/update/dragonfall/' + platform;

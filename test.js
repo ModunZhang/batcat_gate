@@ -3,26 +3,26 @@
  */
 
 const MongoClient = require('mongodb').MongoClient;
-
+var Promise = require('bluebird');
 
 const DBUrl = 'mongodb://modun:Zxm75504109@47.88.35.31:27017/dragonfall-scmobile-wp?authSource=admin';
-let db = null;
+var db = null;
 function getDB() {
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject) {
         if (db && db.serverConfig.isConnected()) return resolve(db);
-        MongoClient.connect(DBUrl, (err, _db) => {
+        MongoClient.connect(DBUrl, function (err, _db) {
             if (err) return reject(err);
             console.log('db opened');
             db = _db;
-            db.on('close', () => {
+            db.on('close', function () {
                 console.log('db closed');
                 db = null;
             });
-            db.on('timeout', (e) => {
+            db.on('timeout', function (e) {
                 console.error(e);
                 closeDB();
             });
-            db.on('error', (e) => {
+            db.on('error', function (e) {
                 console.error(e);
                 closeDB();
             });
@@ -41,26 +41,26 @@ function closeDB() {
 }
 
 function isDeviceExist(deviceId) {
-    return getDB().then((db) => {
+    return getDB().then(function (db) {
         const collection = db.collection('devices');
         return collection.find({_id: deviceId}).count();
-    }).then((count) => {
+    }).then(function (count) {
         return Promise.resolve(count > 0);
     })
 }
 
-isDeviceExist('1f495b828e7823f5d7644fff141a8918').then((exist) => {
+isDeviceExist('1f495b828e7823f5d7644fff141a8918').then(function (exist) {
     console.log(exist);
     return isDeviceExist('fadb588e0617f93ccc59d0cfd3407485');
-}).then((exist) => {
+}).then(function (exist) {
     console.log(exist);
     return isDeviceExist('fadb588e0617f93ccc59d0cfd3407481');
-}).then((exist) => {
+}).then(function (exist) {
     console.log(exist);
     return closeDB();
-}).then(() => {
+}).then(function () {
     return isDeviceExist('fadb588e0617f93ccc59d0cfd3407481');
-}).then((exist) => {
+}).then(function (exist) {
     console.log(exist);
     closeDB();
 });
