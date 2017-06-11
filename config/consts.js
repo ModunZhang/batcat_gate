@@ -3,13 +3,13 @@
  */
 
 module.exports = {
-  GameEnv:{
-    Development:"development",
-    Production:"production"
-  },
-  PlatForm:{
-    Ios:'ios',
-    Wp:'wp',
-    Android:'android'
-  }
+    GameEnv: {
+        Development: "development",
+        Production: "production"
+    },
+    PlatForm: {
+        // Ios:'ios',
+        Wp: 'wp',
+        // Android:'android'
+    }
 };
